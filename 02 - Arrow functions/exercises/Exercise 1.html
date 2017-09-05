@@ -35,13 +35,13 @@
   const itemArray = [...document.querySelectorAll('li')];
   
   const total = 
-    itemArray.filter(item => item.innerText.includes('Flexbox'))
-    .map(item => item.attributes[0].nodeValue)
-    .map(function(item) {
-      const time = item.split(':');
-      return time[0] * 60 + time[1];
+    itemArray.filter(item => item.textContent.includes('Flexbox'))
+    .map(item => item.dataset.time)
+    .map(item => {
+      const time = item.split(':').map(unit => parseFloat(unit));
+      return (time[0] * 60) + time[1];
     })
-    .reduce((a, b) => parseInt(a) + parseInt(b));
+    .reduce((a, b) => a + b, 0);
     
   console.log(total);
 
